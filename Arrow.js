@@ -1,7 +1,7 @@
 import React, {
-    PropTypes,
     Component,
 } from 'react'
+import PropTypes from 'prop-types'
 import {
     StyleSheet,
     View,
@@ -44,7 +44,7 @@ export default class Arrow extends Component {
         this._transform = Utils.getArrowTransform(props.start, props.end, props.width, this._borderWidth, props.vertexDeg)
     }
 
-    render () {
+    render() {
         return (
             <View
                 style={[styles.container, {
@@ -55,11 +55,11 @@ export default class Arrow extends Component {
                     borderBottomColor: 'transparent',
                     left: this._transform.origin.x,
                     top: this._transform.origin.y,
-                    transform: [{translateX: this._transform.translateX},
-                        {translateY: this._transform.translateY},
-                        {rotateZ: this._transform.rotateRad + 'rad'}]
-                    }]}/>
-            )
+                    transform: [{ translateX: this._transform.translateX },
+                    { translateY: this._transform.translateY },
+                    { rotateZ: this._transform.rotateRad + 'rad' }]
+                }]} />
+        )
 
     }
 

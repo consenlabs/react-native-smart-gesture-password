@@ -1,7 +1,7 @@
 import React, {
-    PropTypes,
     Component,
 } from 'react'
+import PropTypes from 'prop-types'
 import {
     StyleSheet,
     View,
@@ -33,7 +33,7 @@ export default class Point extends Component {
     }
 
     // 构造
-    constructor (props) {
+    constructor(props) {
         super(props)
         // 初始状态
         this.state = {}
@@ -48,10 +48,10 @@ export default class Point extends Component {
 
     }
 
-    render () {
+    render() {
         this._color = this.props.isWarning ?
             this.props.warningColor :
-            ( this.props.isActive ? this.props.activeColor : this.props.color )
+            (this.props.isActive ? this.props.activeColor : this.props.color)
 
         return (
             <Circle
@@ -60,7 +60,7 @@ export default class Point extends Component {
                 radius={this.props.radius}
                 borderWidth={this.props.borderWidth}
                 position={this._outerCirclePosition}>
-                { (this.props.isActive || this.props.isWarning) ? (
+                {(this.props.isActive || this.props.isWarning) ? (
                     <Circle
                         isFill={true}
                         color={this._color}

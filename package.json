@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/react-native-component/react-native-smart-gesture-password/issues"
   },
-  "homepage": "https://github.com/react-native-component/react-native-smart-gesture-password#readme"
+  "homepage": "https://github.com/react-native-component/react-native-smart-gesture-password#readme",
+  "dependencies": {
+    "prop-types": "^15.6.0"
+  }
 }

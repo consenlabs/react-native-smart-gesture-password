@@ -1,7 +1,7 @@
 import React, {
-    PropTypes,
     Component,
 } from 'react'
+import PropTypes from 'prop-types'
 import {
     StyleSheet,
     View,
@@ -35,13 +35,13 @@ export default class Line extends Component {
     }
 
     // 构造
-    constructor (props) {
+    constructor(props) {
         super(props)
         // 初始状态
         this.state = {}
     }
 
-    render () {
+    render() {
         let transform = Utils.getLineTransform(this.props.start, this.props.end)
 
         return (
@@ -52,10 +52,10 @@ export default class Line extends Component {
                     height: this.props.lineWidth,
                     left: this.props.start.x,
                     top: this.props.start.y - this.props.lineWidth / 2,
-                    transform: [{translateX: transform.translateX},
-                        {translateY: transform.translateY},
-                        {rotateZ: transform.rotateRad + 'rad'}]
-                  }]}/>
+                    transform: [{ translateX: transform.translateX },
+                    { translateY: transform.translateY },
+                    { rotateZ: transform.rotateRad + 'rad' }]
+                }]} />
         )
     }
 

@@ -6,9 +6,9 @@
  */
 
 import React, {
-    PropTypes,
     Component,
 } from 'react'
+import PropTypes from 'prop-types'
 import {
     PanResponder,
     Dimensions,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const {width: deviceWidth, height: deviceHeight} = Dimensions.get('window')
+const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window')
 
 export default class GesturePassword extends Component {
 
@@ -69,7 +69,7 @@ export default class GesturePassword extends Component {
     }
 
     // 构造
-    constructor (props) {
+    constructor(props) {
         super(props)
 
         // 初始状态
@@ -90,7 +90,7 @@ export default class GesturePassword extends Component {
         this._sequence = []
     }
 
-    componentWillMount () {
+    componentWillMount() {
 
         this._panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => true,
@@ -103,13 +103,13 @@ export default class GesturePassword extends Component {
 
     }
 
-    componentWillReceiveProps (nextProps) {
+    componentWillReceiveProps(nextProps) {
         this.setState({
             isWarning: nextProps.isWarning
         });
     }
 
-    render () {
+    render() {
         return (
             <View style={[this.props.style, styles.container]}>
                 {this.props.topComponent}
@@ -120,7 +120,8 @@ export default class GesturePassword extends Component {
                         overflow: 'hidden',
                         width: this.props.gestureAreaLength,
                         height: this.props.gestureAreaLength,
-                        marginHorizontal: this._gestureAreaMarginHorizontal,}}>
+                        marginHorizontal: this._gestureAreaMarginHorizontal,
+                    }}>
                     {this._renderLines()}
                     {this._renderPoints()}
                     {this.props.showArrow ? this._renderArrows() : null}
@@ -130,7 +131,7 @@ export default class GesturePassword extends Component {
         )
     }
 
-    componentWillUnmount () {
+    componentWillUnmount() {
         if (this._timer != null) {
             clearTimeout(this._timer)
             this._timer = null
@@ -143,7 +144,7 @@ export default class GesturePassword extends Component {
         this._initializePoints()
     }
 
-    _renderArrows () {
+    _renderArrows() {
         return this.state.arrows.map((arrow, index) => {
             if (this.state.isWarning) {
                 arrow.color = this.props.warningColor
@@ -160,12 +161,12 @@ export default class GesturePassword extends Component {
                     end={{
                         x: arrow.end.x - this._gestureAreaLeft,
                         y: arrow.end.y - this._gestureAreaTop,
-                    }}/>
+                    }} />
             )
         })
     }
 
-    _renderPoints () {
+    _renderPoints() {
         return this.state.points.map((point, index) => {
             return (
                 <Point
@@ -179,12 +180,12 @@ export default class GesturePassword extends Component {
                     isActive={point.isActive}
                     isWarning={point.isActive ? this.state.isWarning : false}
                     index={point.index}
-                    position={point.position}/>
+                    position={point.position} />
             )
         })
     }
 
-    _renderLines () {
+    _renderLines() {
         return this.state.lines.map((line, index) => {
             if (this.state.isWarning) {
                 line.color = this.props.warningColor
@@ -201,14 +202,14 @@ export default class GesturePassword extends Component {
                     end={{
                         x: line.end.x - this._gestureAreaLeft,
                         y: line.end.y - this._gestureAreaTop,
-                    }}/>
+                    }} />
             )
         })
     }
 
-    _initializePoints () {
+    _initializePoints() {
         //avoid repeat invoking(for android)
-        if(this.state.points.length) {
+        if (this.state.points.length) {
             return
         }
 
@@ -235,7 +236,7 @@ export default class GesturePassword extends Component {
         })
     }
 
-    _getTouchPoint (location) {
+    _getTouchPoint(location) {
         for (let point of this.state.points) {
             if (Utils.isPointInPath(location, point.origin, this._pointRadius)) {
                 return point
@@ -244,7 +245,7 @@ export default class GesturePassword extends Component {
         return null
     }
 
-    _addSequence (index) {
+    _addSequence(index) {
         //if (~this._sequence.findIndex((item) => item === index)) {
         if (this._sequence.includes(index)) {
             return
@@ -252,7 +253,7 @@ export default class GesturePassword extends Component {
         this._sequence.push(index)
     }
 
-    _addArrow (arrow) {
+    _addArrow(arrow) {
         this.state.arrows.push(arrow)
         let arrows = this.state.arrows
         this.setState({
@@ -260,7 +261,7 @@ export default class GesturePassword extends Component {
         })
     }
 
-    _addLine (line) {
+    _addLine(line) {
         this.state.lines.push(line)
         let lines = this.state.lines
         this.setState({
@@ -268,7 +269,7 @@ export default class GesturePassword extends Component {
         })
     }
 
-    _updateLine (start, end) {
+    _updateLine(start, end) {
         this._currentLine.start = start
         this._currentLine.end = end
 
@@ -278,14 +279,14 @@ export default class GesturePassword extends Component {
         })
     }
 
-    _setToActive (point) {
+    _setToActive(point) {
         point.isActive = true
         this.setState({
             points: this.state.points,
         })
     }
 
-    _reset () {
+    _reset() {
         let points = this.state.points.map((point, index) => {
             point.isActive = false
             return point
